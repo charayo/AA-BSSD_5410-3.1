@@ -7,9 +7,6 @@ from PIL import Image, ImageDraw
 
 
 def imageManipulation(rgb):
-    # getting user's desired RGB value
-    # IMG_NAME = 'monkey'
-    functioncall = 0
 
     with Image.open(IMG_NAME + '.jpg') as im:
         pixels, yiq_pixels = storePixels(im)
@@ -34,6 +31,7 @@ def imageManipulation(rgb):
 
 
 def handlePixelsToPoint(im, yiq_pixels, subi, choice="nil"):
+    global isReversed
     print("handlePixels")
 
     if choice == "t":
@@ -61,9 +59,10 @@ def handlePixelsToPoint(im, yiq_pixels, subi, choice="nil"):
         return tempImg
 
 
-def main(bool_reversed, img):
-    is_Reversed = bool_reversed
-    imgCopy = img
+def main():
+    global sub_i
+    global isReversed
+    # imgCopy = img
 
     def defaultCall(rgb="183,198,144"):
         subiRes, imRes, yiq_pixelsRes = imageManipulation(rgb)
@@ -89,7 +88,7 @@ def main(bool_reversed, img):
 
         if prompt_inp.lower() == "r":
             handlePixelsToPoint(im, yiq_pixels, subi, "r")
-            is_Reversed = not is_Reversed
+            isReversed = not isReversed
             prompt_inp = getPrompt()
 
         elif prompt_inp.lower() == "c":
@@ -108,11 +107,7 @@ def main(bool_reversed, img):
 
 
 if __name__ == "__main__":
-    global IMG_NAME
     IMG_NAME = 'monkey'
-    global prompt
-    global isReversed
-    global sub_i
-    global imageFile
+    sub_i = ""
     isReversed = False
-    main(isReversed, imageFile)
+    main()
